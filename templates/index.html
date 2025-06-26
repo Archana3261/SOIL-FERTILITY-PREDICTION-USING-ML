@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI-Driven Soil Health Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="page-wrapper">
+        <header id="header" class="alt">
+            <nav id="nav">
+                <ul>
+                    <li class="current">
+                        <a href="index.html">Welcome</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="banner">
+            <div class="inner">
+                <header>
+                    <h2>Soil Fertility Prediction</h2>
+                </header>
+                <p><strong>Predicts the Soil Fertility using Naive Bayes</strong></p>
+            </div>
+        </section>
+
+        <article id="main">
+            <section class="wrapper style2 container special-alt">
+                <div class="row 50%">
+                    <div class="8u 12u(narrower)">
+                        <header>
+                            <h2>Assess the fertility of soil based on the given data sets using the <strong>Naive
+                                    Bayes</strong> algorithm</h2>
+                        </header>
+                        <footer>
+                            <form action="/upload" method="post" enctype="multipart/form-data">
+                                <label for="file" style="color:white;">Upload Soil Test Data (CSV):</label>
+                                <input type="file" name="file" id="file" required>
+                                <button type="submit">Analyze</button>
+                            </form>
+                        </footer>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Modal to show results -->
+        {% if result %}
+        <script>
+            $(document).ready(function () {
+                $('#resultModal').modal('show');
+            });
+        </script>
+
+        <div class="modal" id="resultModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Soil Health Analysis</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>The soil health level is: <b>{{ result }}</b></p>
+
+
+                        <!-- Suggestions based on soil health level -->
+                        <h6>Recommended Actions:</h6>
+                        {% if result == 'Very Low' %}
+                        <p>🌱 Add organic matter, like compost or manure, to boost soil nutrients.</p>
+                        {% elif result == 'Low' %}
+                        <p>🌿 Consider crop rotation and minimal chemical use to enhance fertility.</p>
+                        {% elif result == 'Moderate' %}
+                        <p>🌾 Maintain good practices and monitor nutrient levels regularly.</p>
+                        {% elif result == 'Moderate High' %}
+                        <p>🌸 Use cover crops to sustain soil health and prevent erosion.</p>
+                        {% elif result == 'High' %}
+                        <p>🌻 Excellent fertility! Optimize with balanced nutrient management.</p>
+                        {% elif result == 'Very High' %}
+                        <p>🌼 High fertility! Avoid over-fertilization to prevent nutrient runoff.</p>
+                        {% else %}
+                        <p>🔍 No specific recommendation available. Ensure data accuracy!</p>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

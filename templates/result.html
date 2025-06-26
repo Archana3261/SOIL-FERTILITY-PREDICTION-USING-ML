@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Analysis Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <h1>Soil Health Analysis Result</h1>
+
+    <!-- Trigger the modal on page load -->
+    <script>
+        $(document).ready(function () {
+            $('#resultModal').modal('show');
+        });
+    </script>
+
+    <!-- Modal for displaying result -->
+    <div class="modal" id="resultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Soil Health Analysis</h5>
+                </div>
+                <div class="modal-body">
+                    <p>The soil health level is: <b>{{ result }}</b></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/" class="btn btn-primary">Back to Upload</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
